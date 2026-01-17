@@ -1,4 +1,4 @@
-# Sentiment Analysis - End-to-End Project
+# Multi-language Sentiment Analysis
 
 A complete Multi-language sentiment analysis application using BERT (Bidirectional Encoder Representations from Transformers) for multi-class text classification.
 
