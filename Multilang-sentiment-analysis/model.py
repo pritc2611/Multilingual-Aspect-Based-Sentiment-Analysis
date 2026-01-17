@@ -3,7 +3,6 @@ from pydantic import BaseModel
 import re
 import string
 import torch
-from pathlib import Path
 from typing import List, Dict
 from googletrans import Translator
 from langdetect import detect
