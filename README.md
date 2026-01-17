@@ -27,7 +27,7 @@ sentiment-analysis/
 │   └── style.css           # Styling
 │
 └── models/                 # Saved models (created after training)
-    ├── sentimentbert-clf/  # Trained model
+    ├── quntizedbert-clf/  # Trained model
 ```
 
 ## 🚀 Quick Start
