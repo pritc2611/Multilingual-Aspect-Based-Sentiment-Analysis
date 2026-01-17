@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis - BERT Classifier</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🎭 Multi-language Sentiment Analysis</h1>
+        <p class="subtitle">Powered by Fine-Tuned-BERT</p>
+    </div>
+
+    <form action="/predict" method="post" class="input-form">
+        <div class="form-group">
+            <label for="text">Enter text to analyze:</label>
+            <textarea
+                id="text"
+                name="text"
+                placeholder="Type or paste your text here..."
+                required
+            >{{ text if text else "" }}</textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">
+            <span>Analyze Sentiment</span>
+        </button>
+    </form>
+
+    {% if error %}
+        <div class="alert alert-error">
+            <strong>Error:</strong> {{ error }}
+            <p class="help-text">Make sure the model is trained. Run <code>python train.py</code> first.</p>
+        </div>
+    {% endif %}
+
+    {% if predictions %}
+        <div class="results-section">
+            <div class="top-prediction">
+                <h2>Top Prediction</h2>
+                <div class="prediction-badge prediction-{{ top_prediction.label.lower() }}">
+                    <span class="label">{{ top_prediction.label }}</span>
+                    <span class="confidence">{{ "%.1f" | format(top_prediction.score * 100) }}%</span>
+                </div>
+            </div>
+
+            <div class="all-predictions">
+                <h3>Predictions</h3>
+                <div class="predictions-grid">
+                    {% for item in predictions %}
+                        <div class="prediction-item">
+                            <div class="prediction-header">
+                                <span class="prediction-label">{{ item.label }}</span>
+                                <span class="prediction-score">{{ "%.2f" | format(item.score * 100) }}%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div 
+                                    class="progress-fill progress-{{ item.label.lower() }}"
+                                    style="width: {{ item.score * 100 }}%"
+                                ></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="analyzed-text">
+                <h4>Last Analyzed Text:</h4>
+                <p class="text-preview">{{ text }}</p>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="info-section">
+        <h3>About</h3>
+        <p>This application uses a fine-tuned BERT model to classify text into four sentiment categories:</p>
+        <ul>
+            <li><strong>Positive:</strong> Expresses favorable opinions or emotions</li>
+            <li><strong>Negative:</strong> Expresses unfavorable opinions or emotions</li>
+            <li><strong>Neutral:</strong> Objective or balanced statements</li>
+            <li><strong>Irrelevant:</strong> Off-topic or unrelated content</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
