@@ -20,7 +20,6 @@ LABELS = ["Positive", "Negative", "Neutral", "Irrelevant"]
 class SentimentRequest(BaseModel):
     text: str
 
-
 class SentimentResult(BaseModel):
     label: str
     score: float
