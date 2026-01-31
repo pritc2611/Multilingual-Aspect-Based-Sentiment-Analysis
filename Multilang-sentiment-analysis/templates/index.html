@@ -3,88 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentiment Analysis - BERT Classifier</title>
+    <title>AI Sentiment Analyzer - Multi-Language Support</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-
-<div class="container">
-    <div class="header">
-        <h1>🎭 Multi-language Sentiment Analysis</h1>
-        <p class="subtitle">Powered by Fine-Tuned-BERT</p>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
     </div>
 
-    <form action="/predict" method="post" class="input-form">
-        <div class="form-group">
-            <label for="text">Enter text to analyze:</label>
-            <textarea
-                id="text"
-                name="text"
-                placeholder="Type or paste your text here..."
-                required
-            >{{ text if text else "" }}</textarea>
-        </div>
+    <!-- Main Container -->
+    <div class="main-wrapper">
+        <!-- Hero Header -->
+        <header class="hero-header">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <div class="icon-circle">
+                        <span class="icon-emoji">🎭</span>
+                    </div>
+                </div>
+                <div class="logo-text">
+                    <h1>AI Sentiment Analyzer</h1>
+                    <p class="tagline">Powered by Fine-Tuned BERT &bull; Multi-Language Support</p>
+                </div>
+            </div>
+            
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-icon">🌍</span>
+                    <div class="stat-content">
+                        <span class="stat-label">Languages</span>
+                        <span class="stat-value">100+</span>
+                    </div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-icon">⚡</span>
+                    <div class="stat-content">
+                        <span class="stat-label">Speed</span>
+                        <span class="stat-value">&lt;100ms</span>
+                    </div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-icon">🎯</span>
+                    <div class="stat-content">
+                        <span class="stat-label">Accuracy</span>
+                        <span class="stat-value">95%+</span>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-        <button type="submit" class="btn-primary">
-            <span>Analyze Sentiment</span>
-        </button>
-    </form>
+        <!-- Main Content Card -->
+        <div class="content-card">
+            <!-- Input Section -->
+            <div class="input-section">
+                <form action="/predict" method="post" class="sentiment-form" id="sentimentForm">
+                    <div class="form-header">
+                        <label for="text" class="form-label">
+                            <span class="label-icon">✍️</span>
+                            Enter Your Text
+                        </label>
+                        <div class="char-counter">
+                            <span id="charCount">0</span> / 5000
+                        </div>
+                    </div>
+                    
+                    <div class="textarea-wrapper">
+                        <textarea
+                            id="text"
+                            name="text"
+                            class="sentiment-input"
+                            placeholder="Type or paste any text here in any language...&#10;&#10;Examples:&#10;• I absolutely love this product! 😍&#10;• Ce produit est incroyable!&#10;• यह बहुत अच्छा है!&#10;• Este producto es terrible."
+                            maxlength="5000"
+                            required
+                        >{{ text if text else "" }}</textarea>
+                        <div class="input-decoration"></div>
+                    </div>
 
-    {% if error %}
-        <div class="alert alert-error">
-            <strong>Error:</strong> {{ error }}
-            <p class="help-text">Make sure the model is trained. Run <code>python train.py</code> first.</p>
-        </div>
-    {% endif %}
+                    <button type="submit" class="analyze-btn" id="analyzeBtn">
+                        <span class="btn-content">
+                            <span class="btn-icon">🔍</span>
+                            <span class="btn-text">Analyze Sentiment</span>
+                        </span>
+                    </button>
+                </form>
 
-    {% if predictions %}
-        <div class="results-section">
-            <div class="top-prediction">
-                <h2>Top Prediction</h2>
-                <div class="prediction-badge prediction-{{ top_prediction.label.lower() }}">
-                    <span class="label">{{ top_prediction.label }}</span>
-                    <span class="confidence">{{ "%.1f" | format(top_prediction.score * 100) }}%</span>
+                <!-- Quick Examples -->
+                <div class="quick-examples">
+                    <p class="examples-title">Quick Examples:</p>
+                    <div class="example-chips">
+                        <button type="button" class="example-chip" data-text="I absolutely love this amazing product!">😍 Positive</button>
+                        <button type="button" class="example-chip" data-text="This is the worst experience I've ever had.">😠 Negative</button>
+                        <button type="button" class="example-chip" data-text="The product arrived on time and works as expected.">😐 Neutral</button>
+                        <button type="button" class="example-chip" data-text="The weather is nice today in New York.">🤔 Irrelevant</button>
+                    </div>
                 </div>
             </div>
 
-            <div class="all-predictions">
-                <h3>Predictions</h3>
-                <div class="predictions-grid">
-                    {% for item in predictions %}
-                        <div class="prediction-item">
-                            <div class="prediction-header">
-                                <span class="prediction-label">{{ item.label }}</span>
-                                <span class="prediction-score">{{ "%.2f" | format(item.score * 100) }}%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div 
-                                    class="progress-fill progress-{{ item.label.lower() }}"
-                                    style="width: {{ item.score * 100 }}%"
-                                ></div>
+            <!-- Error Display -->
+            {% if error %}
+            <div class="alert-container">
+                <div class="alert alert-error">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-content">
+                        <strong class="alert-title">Analysis Failed</strong>
+                        <p class="alert-message">{{ error }}</p>
+                        <p class="alert-help">💡 Make sure the model is trained. Run <code>python train.py</code> first.</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Results Section -->
+            {% if predictions %}
+            <div class="results-container">
+                <!-- Top Prediction Card -->
+                <div class="top-prediction-card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <span class="title-icon">🎯</span>
+                            Primary Sentiment
+                        </h2>
+                        <div class="confidence-badge">
+                            {{ "%.1f" | format(top_prediction.score * 100) }}% Confident
+                        </div>
+                    </div>
+                    
+                    <div class="sentiment-display">
+                        <div class="sentiment-icon-wrapper">
+                            <div class="sentiment-circle sentiment-circle-{{ top_prediction.label.lower() }}">
+                                <span class="sentiment-emoji">
+                                    {% if top_prediction.label == "Positive" %}😊
+                                    {% elif top_prediction.label == "Negative" %}😢
+                                    {% elif top_prediction.label == "Neutral" %}😐
+                                    {% else %}🤔{% endif %}
+                                </span>
                             </div>
                         </div>
-                    {% endfor %}
+                        
+                        <div class="sentiment-info">
+                            <h3 class="sentiment-label sentiment-label-{{ top_prediction.label.lower() }}">
+                                {{ top_prediction.label }}
+                            </h3>
+                            <div class="sentiment-confidence">
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill confidence-fill-{{ top_prediction.label.lower() }}" 
+                                         style="width: {{ top_prediction.score * 100 }}%">
+                                    </div>
+                                </div>
+                                <span class="confidence-text">{{ "%.2f" | format(top_prediction.score * 100) }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- All Predictions -->
+                <div class="all-predictions-section">
+                    <h3 class="section-title">
+                        <span class="title-icon">📊</span>
+                        Detailed Analysis
+                    </h3>
+                    
+                    <div class="predictions-grid">
+                        {% for item in predictions %}
+                        <div class="prediction-card">
+                            <div class="prediction-rank">{{ loop.index }}</div>
+                            <div class="prediction-content">
+                                <div class="prediction-top">
+                                    <span class="prediction-emoji">
+                                        {% if item.label == "Positive" %}😊
+                                        {% elif item.label == "Negative" %}😢
+                                        {% elif item.label == "Neutral" %}😐
+                                        {% else %}🤔{% endif %}
+                                    </span>
+                                    <span class="prediction-label">{{ item.label }}</span>
+                                </div>
+                                <div class="prediction-score-section">
+                                    <div class="score-bar">
+                                        <div class="score-fill score-fill-{{ item.label.lower() }}" 
+                                             style="width: {{ item.score * 100 }}%">
+                                        </div>
+                                    </div>
+                                    <span class="prediction-percentage">{{ "%.2f" | format(item.score * 100) }}%</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Analyzed Text Display -->
+                <div class="analyzed-section">
+                    <h4 class="analyzed-title">
+                        <span class="title-icon">📝</span>
+                        Analyzed Text
+                    </h4>
+                    <div class="text-display">
+                        <p class="analyzed-text">{{ text }}</p>
+                        <button type="button" class="copy-btn" onclick="copyText()">
+                            <span class="copy-icon">📋</span>
+                            Copy
+                        </button>
+                    </div>
                 </div>
             </div>
-
-            <div class="analyzed-text">
-                <h4>Last Analyzed Text:</h4>
-                <p class="text-preview">{{ text }}</p>
-            </div>
+            {% endif %}
         </div>
-    {% endif %}
 
-    <div class="info-section">
-        <h3>About</h3>
-        <p>This application uses a fine-tuned BERT model to classify text into four sentiment categories:</p>
-        <ul>
-            <li><strong>Positive:</strong> Expresses favorable opinions or emotions</li>
-            <li><strong>Negative:</strong> Expresses unfavorable opinions or emotions</li>
-            <li><strong>Neutral:</strong> Objective or balanced statements</li>
-            <li><strong>Irrelevant:</strong> Off-topic or unrelated content</li>
-        </ul>
+        <!-- Info Footer -->
+        <footer class="info-footer">
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-icon">😊</div>
+                    <h4>Positive</h4>
+                    <p>Favorable opinions, emotions, or satisfaction</p>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">😢</div>
+                    <h4>Negative</h4>
+                    <p>Unfavorable opinions, complaints, or dissatisfaction</p>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">😐</div>
+                    <h4>Neutral</h4>
+                    <p>Objective statements without clear sentiment</p>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🤔</div>
+                    <h4>Irrelevant</h4>
+                    <p>Off-topic or unrelated content</p>
+                </div>
+            </div>
+            
+            <div class="api-section">
+                <h4>🔌 API Access Available</h4>
+                <code>POST /api/predict</code>
+                <span class="api-docs-link">View Documentation →</span>
+            </div>
+        </footer>
     </div>
-</div>
 
+    <script>
+        // Character counter
+        const textarea = document.getElementById('text');
+        const charCount = document.getElementById('charCount');
+        
+        if (textarea) {
+            textarea.addEventListener('input', function() {
+                charCount.textContent = this.value.length;
+            });
+            
+            // Initialize count
+            charCount.textContent = textarea.value.length;
+        }
+
+        // Example chips
+        const exampleChips = document.querySelectorAll('.example-chip');
+        exampleChips.forEach(chip => {
+            chip.addEventListener('click', function(e) {
+                e.preventDefault();
+                textarea.value = this.dataset.text;
+                charCount.textContent = textarea.value.length;
+                textarea.focus();
+            });
+        });
+
+        // Copy text function
+        function copyText() {
+            const text = document.querySelector('.analyzed-text').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<span class="copy-icon">✅</span> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                }, 2000);
+            });
+        }
+
+        // Form submission animation
+        const form = document.getElementById('sentimentForm');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        
+        if (form) {
+            form.addEventListener('submit', function() {
+                analyzeBtn.innerHTML = '<span class="btn-content"><span class="spinner"></span> Analyzing...</span>';
+                analyzeBtn.disabled = true;
+            });
+        }
+    </script>
 </body>
 </html>

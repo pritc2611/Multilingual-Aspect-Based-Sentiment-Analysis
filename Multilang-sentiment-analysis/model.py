@@ -11,8 +11,8 @@ translator = Translator()
 
 
 # Configuration
-MODEL_PATH = ".\sentimentbert-clf"
-TOKENIZER_PATH = ".\sentimentbert-clf"
+MODEL_PATH = "/quntizedbert-clf/"
+TOKENIZER_PATH = "/quntizedbert-clf/"
 
 LABELS = ["Positive", "Negative", "Neutral", "Irrelevant"]
 

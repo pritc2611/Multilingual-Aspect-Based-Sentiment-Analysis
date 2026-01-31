@@ -3,12 +3,11 @@ from transformers import (
     AutoTokenizer,
     pipeline,
 )
-from fastapi import FastAPI , Request , Form
+from fastapi import FastAPI , Request , Form , HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse , RedirectResponse
-from model import predict_sentiment , SentimentResponse , SentimentRequest
+from model import predict_sentiment , SentimentResponse , SentimentRequest , SentimentResult
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-import uvicorn
 
 
 app = FastAPI(title="Sentiment Analysis Api",version="1.0")
@@ -90,12 +89,3 @@ async def get_labels():
     return {"labels": LABELS}
 
 
-
-
-if __name__ == "__main__":
-    uvicorn.run(
-        "app:app",
-        host="0.0.0.0",
-        port=8000,
-        reload=True
-    )

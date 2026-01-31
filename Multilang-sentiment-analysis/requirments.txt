@@ -1,10 +1,15 @@
+torch==2.2.2+cpu
+--find-links https://download.pytorch.org/whl/cpu/torch_stable.html
 transformers
 fastapi
 pydantic
-re
-string
 googletrans==4.0.0-rc1
+httpx==0.13.3
+httpcore==0.9.1
+h11==0.9.0
 langdetect
 uvicorn
-torch --index-url https://download.pytorch.org/whl/cu118
 typing
+python-multipart
+python-multipart==0.0.20
+numpy==1.26.4

@@ -13,7 +13,7 @@ A complete Multi-language sentiment analysis application using BERT (Bidirection
 ## 📋 Project Structure
 
 ```
-sentiment-analysis/
+Multilang-sentiment-analysis/
 │
 ├── model.py                 # Inference and model loading
 ├── app.py                   # FastAPI application
@@ -26,8 +26,7 @@ sentiment-analysis/
 ├── static/
 │   └── style.css           # Styling
 │
-└── models/                 # Saved models (created after training)
-    ├── sentimentbert-clf/  # Trained model
+└── finetined-BERT/         # Trained model
 ```
 
 ## 🚀 Quick Start
@@ -35,8 +34,8 @@ sentiment-analysis/
 ### 1. Installation
 
 ```bash
-mkdir sentiment-analysis
-cd sentiment-analysis
+mkdir Multilang-sentiment-analysis
+cd Multilang-sentiment-analysis
 ```
 
 ```bash
@@ -45,16 +44,13 @@ git clone https://github.com/pritc2611/Multilang-sentiment-analysis
 
 ```bash
 # Install dependencies
-pip install -r requirements.txt
+pip install -r requirments.txt
 ```
 
 ### 2. Run the Application
 
 ```bash
-# Start the FastAPI server
-python app.py
-
-# Or use uvicorn directly
+# use uvicorn directly
 uvicorn app:app --reload --host 0.0.0.0 --port 8000
 ```
 
@@ -108,7 +104,7 @@ curl http://localhost:8000/api/labels
 - **Base Model**: BERT (bert-base-uncased)
 - **Task**: Sequence Classification
 - **Classes**: 4 (Positive, Negative, Neutral, Irrelevant)
-- **Max Sequence Length**: 128 tokens
+- **Max Sequence Length**: No Limits
 
 ### Training
 - **Optimizer**: AdamW
