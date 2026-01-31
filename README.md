@@ -26,7 +26,12 @@ Multilang-sentiment-analysis/
 ├── static/
 │   └── style.css           # Styling
 │
+<<<<<<< HEAD
 └── finetined-BERT/         # Trained model
+=======
+└── models/                 # Saved models (created after training)
+    ├── quntizedbert-clf/  # Trained model
+>>>>>>> 920b14fb3f180d4812cf8e08f2f80256a084e18d
 ```
 
 ## 🚀 Quick Start
