@@ -26,12 +26,7 @@ Multilang-sentiment-analysis/
 ├── static/
 │   └── style.css           # Styling
 │
-<<<<<<< HEAD
 └── finetined-BERT/         # Trained model
-=======
-└── models/                 # Saved models (created after training)
-    ├── quntizedbert-clf/  # Trained model
->>>>>>> 920b14fb3f180d4812cf8e08f2f80256a084e18d
 ```
 
 ## 🚀 Quick Start
@@ -134,7 +129,6 @@ curl http://localhost:8000/api/labels
 | `/api/predict` | POST | REST API prediction |
 | `/api/health` | GET | Health check |
 | `/api/labels` | GET | Available labels |
-
 
 
 **Happy Analyzing! 🎭**
