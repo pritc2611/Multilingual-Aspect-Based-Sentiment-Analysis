@@ -113,7 +113,7 @@
                     <div class="alert-content">
                         <strong class="alert-title">Analysis Failed</strong>
                         <p class="alert-message">{{ error }}</p>
-                        <p class="alert-help">💡 Make sure the model is trained. Run <code>python train.py</code> first.</p>
+                        <p class="alert-help">💡 Make sure the model path is Correct or Download first.</p>
                     </div>
                 </div>
             </div>
@@ -161,6 +161,23 @@
                         </div>
                     </div>
                 </div>
+                
+                {% if aspects %}
+                <div class="aspects-section">
+                    <h3 class="section-title">
+                        <span class="title-icon">🔎</span>
+                        Extracted Aspects
+                    </h3>
+                    <div class="aspects-container">
+                        {% for item in aspects %}
+                        <div class="aspect-chip">
+                            {{ item[0] }}: {{ item[1] }} ({{ "%.0f"|format(item[2]*100) }}%)
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
 
                 <!-- All Predictions -->
                 <div class="all-predictions-section">

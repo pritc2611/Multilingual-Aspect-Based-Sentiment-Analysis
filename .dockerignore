@@ -1,0 +1,8 @@
+./__pycache__
+.gitignore
+./Multilang-sentiment-analysis/__pycache__
+.gitignore
+./quntizedbert-clf
+./aspect_text-clf-checkpoints
+./aspect_token-clf-checkpoints
+.dockerignore

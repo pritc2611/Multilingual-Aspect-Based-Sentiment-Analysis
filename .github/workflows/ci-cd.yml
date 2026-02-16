@@ -27,7 +27,7 @@ jobs:
         
         - name: building docker image
           run: |
-            docker build -t ${{secrets.DOCKER_USERNAME}}/Multilang-sentimet-app Multilang-sentiment-analysis/dockerfile
+            docker build -t ${{secrets.DOCKER_USERNAME}} .
 
         - name: checking required secrets keys
           run: |
