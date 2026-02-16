@@ -102,13 +102,13 @@ async def predict_sentiment(text: str) -> Dict[str, any]:
             "label": label,
             "score": round(prob, 4)
         })
-    
+
+
     formatted_aspects = []
     for item in raw_aspect_results:
-        # Keep it as a dictionary so keys like "aspect" exist
         aspect_dict = {
             "aspect": item["aspect"],
-            "sentiment": item["sentiment"],
+            "sentiment": item["sentiment"].lower(),
             "confidence": round(item["confidence"], 4)
         }
         formatted_aspects.append(aspect_dict)
