@@ -19,12 +19,7 @@ jobs:
           uses: actions/checkout@v4
           with:
             python-version: "3.10"
-        
-        - name: installing dependecies
-          run: |
-            python -m pip install --upgrade pip
-            pip install -r Multilang-sentiment-analysis/requirments.txt
-        
+                
         - name: building docker image
           run: |
             docker build -t ${{secrets.DOCKER_USERNAME}}/Multilingual-Aspect-Based-Sentiment-app .
