@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && rm -rf /var/lib/apt/lists/*
 
 # Copy only requirements first for caching
-COPY .\Multilang-sentiment-analysis\requirments.txt .
+COPY requirments.txt .
 
 # Install dependencies into /install
 RUN pip install --prefix=/dependencies -r requirments.txt \
