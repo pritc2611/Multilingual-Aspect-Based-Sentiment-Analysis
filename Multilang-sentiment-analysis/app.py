@@ -1,6 +1,6 @@
 from fastapi import FastAPI , Request , Form , HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse , RedirectResponse
-from model import predict_sentiment , SentimentResponse , SentimentRequest , SentimentResult , AspectResult
+from src.model import predict_sentiment , SentimentResponse , SentimentRequest , SentimentResult , AspectResult
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
@@ -80,7 +80,7 @@ async def predict_api(request: SentimentRequest):
 
 @app.get("/api/health")
 async def health_check():
-    from model import sentiment_model
+    from src.model import sentiment_model
 
     return {
         "status": "healthy" if sentiment_model is not None else "unhealthy",
@@ -91,7 +91,7 @@ async def health_check():
 @app.get("/api/labels")
 async def get_labels():
     """Get available sentiment labels"""
-    from model import LABELS
+    from src.model import LABELS
     return {"labels": LABELS}
 
 
