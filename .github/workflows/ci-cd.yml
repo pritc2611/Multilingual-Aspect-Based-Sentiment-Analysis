@@ -36,5 +36,5 @@ jobs:
         
         - name: taging & pusing image
           run: |
-            docker push ${{secrets.DOCKER_USERNAME}}/multilingual-aspect-based-sentiment-app:latest
+            docker push ${{secrets.DOCKER_USERNAME}}/multilingual-aspect-sentiment-app:latest
         
