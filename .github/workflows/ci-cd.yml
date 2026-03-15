@@ -22,7 +22,7 @@ jobs:
                 
         - name: building docker image
           run: |
-            docker build -t ${{secrets.DOCKER_USERNAME}}/multilingual-aspect-based-sentiment-app .
+            docker build -t ${{secrets.DOCKER_USERNAME}}/multilingual-aspect-sentiment-app .
         - name: checking required secrets keys
           run: |
             if [ -z "${{ secrets.DOCKER_USERNAME }}" ]; then echo "Missing DOCKER_USERNAME" && exit 1; fi
